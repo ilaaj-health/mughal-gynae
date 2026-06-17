@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import DoctorCard from "../components/DoctorCard.astro";
+import CTA from "../components/CTA.astro";
+import { doctors } from "../data/doctors";
+
+const gynae = doctors.filter((d) => d.department === "Gynaecology & Obstetrics");
+const general = doctors.filter((d) => d.department === "General & Family Medicine");
+---
+
+<Layout title="Our Doctors" description="Meet the experienced female gynaecologists and physicians at Mughal Medical & Gynae Centre, Johar Town Lahore — including a UK-trained MRCOG consultant.">
+  <PageHero
+    title="Our Specialists"
+    crumb="Meet the Team"
+    subtitle="Experienced, caring and highly qualified — our doctors are dedicated to your health and comfort."
+  />
+
+  <!-- Gynaecology team -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto w-[92%] max-w-[1180px]">
+      <SectionHeading
+        eyebrow="Gynaecology & Obstetrics"
+        title="Women's Health Specialists"
+        subtitle="Senior lady gynaecologists offering expert care across pregnancy, surgery and every women's health concern."
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {gynae.map((d, i) => (
+          <DoctorCard doctor={d} delay={`d${i % 3}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- General medicine team -->
+  <section class="bg-cream py-20 sm:py-24">
+    <div class="mx-auto w-[92%] max-w-[1180px]">
+      <SectionHeading
+        eyebrow="General & Family Medicine"
+        title="Care for the Whole Family"
+        subtitle="Everyday medical care for adults and families, alongside our specialist women's services."
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {general.map((d, i) => (
+          <DoctorCard doctor={d} delay={`d${i % 3}`} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA title="Not sure which doctor to see?" text="Tell us your concern on WhatsApp or by phone and our team will guide you to the right specialist and a suitable appointment time." />
+</Layout>

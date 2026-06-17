@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* ============================================================
+   MUGHAL MEDICAL & GYNAE CENTRE — Design System
+   Premium maroon & gold • Playfair Display + Plus Jakarta Sans
+   ============================================================ */
+
+@theme {
+  /* ---- Maroon (primary) ---- */
+  --color-maroon-50:  #fcf3f6;
+  --color-maroon-100: #f9e5ec;
+  --color-maroon-200: #f1c6d6;
+  --color-maroon-300: #e49bb5;
+  --color-maroon-400: #d2658d;
+  --color-maroon-500: #b8406c;
+  --color-maroon-600: #9a2b51;
+  --color-maroon-700: #7c1f3d;   /* primary brand */
+  --color-maroon-800: #5d1630;
+  --color-maroon-900: #420f22;
+  --color-maroon-950: #2b0916;
+
+  /* ---- Gold (accent) ---- */
+  --color-gold-50:  #fdfaef;
+  --color-gold-100: #faf2d6;
+  --color-gold-200: #f3e0a6;
+  --color-gold-300: #e9c86f;
+  --color-gold-400: #dcae46;
+  --color-gold-500: #c9a23f;     /* accent brand */
+  --color-gold-600: #a9842f;
+  --color-gold-700: #866628;
+  --color-gold-800: #6e5324;
+  --color-gold-900: #5d4621;
+
+  /* ---- Semantic ---- */
+  --color-ink:       #2b121a;
+  --color-cream:     #fbf6ef;
+  --color-blush:     #f9eef2;
+  --color-champagne: #e7c97e;
+
+  /* ---- Fonts ---- */
+  --font-sans:    "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* ---- Shadows ---- */
+  --shadow-soft:   0 10px 30px rgba(124, 31, 61, .12);
+  --shadow-card:   0 20px 45px -14px rgba(124, 31, 61, .25);
+  --shadow-glow:   0 10px 30px rgba(0, 0, 0, .28);
+  --shadow-gold:   0 10px 26px rgba(201, 162, 63, .35);
+
+  /* ---- Animation utilities (keyframes defined globally below) ---- */
+  --animate-float:      float 6s ease-in-out infinite;
+  --animate-floaty:     floaty 4.5s ease-in-out infinite;
+  --animate-pulse-soft: pulseSoft 2.4s ease-in-out infinite;
+  --animate-shimmer:    shimmer 6s linear infinite;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes fadeUp    { from { opacity:0; transform:translateY(42px); }  to { opacity:1; transform:translateY(0); } }
+@keyframes fadeLeft  { from { opacity:0; transform:translateX(-52px); } to { opacity:1; transform:translateX(0); } }
+@keyframes fadeRight { from { opacity:0; transform:translateX(52px); }  to { opacity:1; transform:translateX(0); } }
+@keyframes zoomIn    { from { opacity:0; transform:scale(.85); }        to { opacity:1; transform:scale(1); } }
+@keyframes float     { 0%,100% { transform:translateY(0); }   50% { transform:translateY(-16px); } }
+@keyframes floaty    { 0%,100% { transform:translateY(0); }   50% { transform:translateY(-9px); } }
+@keyframes pulseSoft { 0%,100% { transform:scale(1); }        50% { transform:scale(1.06); } }
+@keyframes shimmer   { 0% { background-position:-200% 0; }     100% { background-position:200% 0; } }
+@keyframes spinSlow  { to { transform:rotate(360deg); } }
+
+/* ---------- Base ---------- */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-sans);
+  color: #5c4a52;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+/* In @layer base so text-* utilities (e.g. text-white) can override the default colour */
+@layer base {
+  h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-ink); letter-spacing: -.01em; }
+}
+::selection { background: var(--color-maroon-700); color: #fff; }
+
+/* Thin elegant scrollbar */
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: var(--color-maroon-300); border-radius: 9px; border: 3px solid var(--color-cream); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-maroon-500); }
+
+/* ---------- Scroll reveal ---------- */
+.reveal { opacity: 0; will-change: transform, opacity; }
+.reveal.in        { animation: fadeUp .85s cubic-bezier(.22,.61,.36,1) forwards; }
+.reveal.left.in   { animation: fadeLeft .85s cubic-bezier(.22,.61,.36,1) forwards; }
+.reveal.right.in  { animation: fadeRight .85s cubic-bezier(.22,.61,.36,1) forwards; }
+.reveal.zoom.in   { animation: zoomIn .8s cubic-bezier(.22,.61,.36,1) forwards; }
+.reveal.d1.in { animation-delay: .12s; }
+.reveal.d2.in { animation-delay: .24s; }
+.reveal.d3.in { animation-delay: .36s; }
+.reveal.d4.in { animation-delay: .48s; }
+.reveal.d5.in { animation-delay: .60s; }
+
+/* ---------- Nav underline ---------- */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--color-maroon-700), var(--color-gold-500));
+  transition: width .28s ease;
+}
+.nav-link:hover::after, .nav-link[aria-current="page"]::after { width: 100%; }
+
+/* ---------- Decorative ---------- */
+.gold-rule {
+  height: 2px; width: 64px;
+  background: linear-gradient(90deg, var(--color-gold-500), transparent);
+  border-radius: 2px;
+}
+.eyebrow {
+  display: inline-block; font-family: var(--font-sans); font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; font-size: 12px;
+}
+
+/* Sticky header scroll state (toggled by JS) */
+#siteHeader { transition: box-shadow .3s ease, background-color .3s ease; }
+#siteHeader.is-scrolled { box-shadow: 0 10px 30px rgba(124, 31, 61, .10); background-color: rgba(255, 255, 255, .94); }
+.text-gradient-gold {
+  background: linear-gradient(100deg, var(--color-gold-200), var(--color-champagne) 45%, var(--color-gold-400));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Hero gradient + texture */
+.hero-bg {
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(201,162,63,.22), transparent 60%),
+    radial-gradient(700px 600px at -5% 110%, rgba(212,101,141,.20), transparent 60%),
+    linear-gradient(140deg, #420f22 0%, #5d1630 38%, #7c1f3d 100%);
+}
+.band-maroon {
+  background:
+    radial-gradient(600px 400px at 100% 0%, rgba(201,162,63,.18), transparent 60%),
+    linear-gradient(135deg, #5d1630, #7c1f3d 60%, #9a2b51);
+}
+
+/* Gold shine sweep on hover (add class .shine) */
+.shine { position: relative; overflow: hidden; }
+.shine::before {
+  content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-20deg); transition: left .7s ease;
+}
+.shine:hover::before { left: 130%; }
+
+/* Soft pattern dots */
+.dot-grid {
+  background-image: radial-gradient(rgba(124,31,61,.16) 1.4px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+/* Card hover lift helper */
+.lift { transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease; }
+.lift:hover { transform: translateY(-8px); }
+
+/* ---------- View Transitions polish ---------- */
+@keyframes vt-fade-in  { from { opacity: 0; } }
+@keyframes vt-fade-out { to   { opacity: 0; } }
+::view-transition-old(root) { animation: vt-fade-out .28s ease both; }
+::view-transition-new(root) { animation: vt-fade-in  .35s ease both; }
+
+/* ---------- Accessibility: respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; }
+}

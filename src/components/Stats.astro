@@ -1,0 +1,26 @@
+---
+/* Figures are derived from the doctor roster (combined experience, head-count)
+   — safe, defensible numbers. Swap in real centre figures when available. */
+interface Stat { icon: string; target: number; suffix: string; label: string; }
+const stats: Stat[] = [
+  { icon: "fa-solid fa-award", target: 70, suffix: "+", label: "Years Combined Experience" },
+  { icon: "fa-solid fa-user-doctor", target: 6, suffix: "", label: "Specialist Doctors" },
+  { icon: "fa-solid fa-venus", target: 5, suffix: "", label: "Female Gynaecologists" },
+  { icon: "fa-solid fa-truck-medical", target: 24, suffix: "/7", label: "Emergency & Maternity" },
+];
+---
+
+<section class="band-maroon relative overflow-hidden py-16 text-white sm:py-20">
+  <div class="dot-grid absolute inset-0 opacity-10"></div>
+  <div class="relative mx-auto grid w-[92%] max-w-[1180px] grid-cols-2 gap-8 lg:grid-cols-4">
+    {stats.map((s, i) => (
+      <div class:list={["reveal text-center", `d${i}`]}>
+        <i class={`${s.icon} mb-3 text-3xl text-gold-300`}></i>
+        <div class="font-display text-4xl font-bold text-white sm:text-5xl">
+          <span class="count" data-target={s.target}>0</span>{s.suffix}
+        </div>
+        <p class="mt-1.5 text-sm font-medium tracking-wide text-maroon-100/80">{s.label}</p>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+/* ⚠️ PLACEHOLDER / ILLUSTRATIVE testimonials.
+   Replace with real, consented patient reviews before going live.
+   (The centre has strong 5★ ratings on Marham & oladoc.) */
+const testimonials = [
+  {
+    name: "S. Fatima",
+    area: "Johar Town, Lahore",
+    text: "From my first antenatal visit to delivery, the doctors explained everything calmly and made me feel safe. The care and cleanliness were excellent throughout.",
+  },
+  {
+    name: "A. Bibi",
+    area: "Model Town, Lahore",
+    text: "I was struggling with PCOS for years. The specialist here actually listened, ran the right tests and gave me a clear plan. I finally feel in control of my health.",
+  },
+  {
+    name: "H. Riaz",
+    area: "Wapda Town, Lahore",
+    text: "Booking on WhatsApp was so easy and the wait time was short. A caring, professional team — highly recommended for any women's health concern.",
+  },
+];
+---
+
+<section class="bg-cream py-20 sm:py-24">
+  <div class="mx-auto w-[92%] max-w-[1180px]">
+    <SectionHeading
+      eyebrow="Patient Stories"
+      title="Trusted by Families Across Lahore"
+      subtitle="Real care, real reassurance — here's what patients say about their experience with our specialists."
+    />
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {testimonials.map((t, i) => (
+        <figure class:list={["reveal lift rounded-2xl border border-maroon-100 bg-white p-7 shadow-soft", `d${i}`]}>
+          <div class="mb-3 flex items-center gap-1 text-gold-500">
+            {[0, 1, 2, 3, 4].map(() => <i class="fa-solid fa-star text-sm"></i>)}
+          </div>
+          <i class="fa-solid fa-quote-left mb-2 text-2xl text-maroon-200"></i>
+          <blockquote class="text-[15px] leading-relaxed text-[#5c4a52]">{t.text}</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3 border-t border-maroon-50 pt-4">
+            <span class="grid h-11 w-11 place-items-center rounded-full bg-linear-to-br from-maroon-700 to-maroon-900 font-display font-bold text-gold-200">
+              {t.name.split(" ").map((p) => p[0]).join("")}
+            </span>
+            <span>
+              <span class="block font-semibold text-ink">{t.name}</span>
+              <span class="block text-xs text-[#8a7780]">{t.area}</span>
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

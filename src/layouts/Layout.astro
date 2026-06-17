@@ -1,0 +1,169 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import { site } from "../data/site";
+import TopBar from "../components/TopBar.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#7c1f3d" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="en_PK" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Local business structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      name: site.name,
+      description: site.description,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.addressLine,
+        addressLocality: "Johar Town, Lahore",
+        addressCountry: "PK",
+      },
+      telephone: site.phoneDisplay,
+      medicalSpecialty: ["Gynecologic", "Obstetric"],
+      openingHours: "Mo-Su 09:00-23:00",
+    })} />
+
+    <ClientRouter />
+  </head>
+
+  <body>
+    <TopBar />
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+
+    <script>
+      // Re-run after every View Transition navigation (and on first load).
+      function setup() {
+        // ---- Mobile menu ----
+        const toggle = document.getElementById("menuToggle");
+        const menu = document.getElementById("mobileMenu");
+        if (toggle && menu) {
+          toggle.addEventListener("click", () => {
+            const isHidden = menu.classList.toggle("hidden");
+            toggle.setAttribute("aria-expanded", String(!isHidden));
+            const icon = toggle.querySelector("i");
+            if (icon) icon.className = isHidden ? "fa-solid fa-bars" : "fa-solid fa-xmark";
+          });
+          menu.querySelectorAll("a").forEach((a) =>
+            a.addEventListener("click", () => menu.classList.add("hidden"))
+          );
+        }
+
+        // ---- Scroll reveal ----
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+        );
+        document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
+
+        // ---- Animated counters ----
+        const cObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const el = e.target;
+              const target = Number(el.getAttribute("data-target") || "0");
+              const duration = 1500;
+              let startTime = null;
+              const step = (now) => {
+                if (startTime === null) startTime = now;
+                const p = Math.min(1, (now - startTime) / duration);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(target * eased).toLocaleString();
+                if (p < 1) requestAnimationFrame(step);
+              };
+              requestAnimationFrame(step);
+              cObs.unobserve(el);
+            });
+          },
+          { threshold: 0.6 }
+        );
+        document.querySelectorAll(".count").forEach((c) => cObs.observe(c));
+
+        // ---- Appointment form -> WhatsApp ----
+        const form = document.getElementById("apptForm");
+        if (form) {
+          form.addEventListener("submit", (ev) => {
+            ev.preventDefault();
+            const val = (id) => {
+              const node = document.getElementById(id);
+              return node && "value" in node ? String(node.value).trim() : "";
+            };
+            const name = val("apptName");
+            const phone = val("apptPhone");
+            const err = document.getElementById("apptError");
+            if (!name || !phone) {
+              if (err) {
+                err.textContent = "Please enter your name and phone number.";
+                err.classList.remove("hidden");
+              }
+              return;
+            }
+            if (err) err.classList.add("hidden");
+            const lines = [
+              "*New Appointment Request — Mughal Gynae*",
+              "Name: " + name,
+              "Phone: " + phone,
+              "Service: " + (val("apptService") || "—"),
+              "Preferred date: " + (val("apptDate") || "—"),
+              "Message: " + (val("apptMsg") || "—"),
+            ];
+            const wa = form.getAttribute("data-wa") || "";
+            window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+          });
+        }
+      }
+
+      document.addEventListener("astro:page-load", setup);
+    </script>
+  </body>
+</html>

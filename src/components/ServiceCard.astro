@@ -1,0 +1,19 @@
+---
+import type { Service } from "../data/services";
+interface Props {
+  service: Service;
+  delay?: string;
+}
+const { service, delay = "" } = Astro.props;
+---
+
+<article class:list={["reveal lift group rounded-2xl border border-maroon-100 bg-white p-7 hover:border-gold-400 hover:shadow-card", delay]}>
+  <div class="shine grid h-14 w-14 place-items-center rounded-xl bg-blush text-2xl text-maroon-700 transition duration-300 group-hover:bg-maroon-700 group-hover:text-gold-300">
+    <i class={service.icon}></i>
+  </div>
+  <h3 class="mt-5 font-display text-xl font-bold text-ink">{service.title}</h3>
+  <p class="mt-2.5 text-[15px] leading-relaxed text-[#6b5a61]">{service.blurb}</p>
+  <a href="/contact" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-maroon-700 transition-all duration-300 group-hover:gap-3">
+    Book now <i class="fa-solid fa-arrow-right-long"></i>
+  </a>
+</article>

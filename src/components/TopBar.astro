@@ -1,0 +1,29 @@
+---
+import { site, waLink } from "../data/site";
+---
+
+<div class="band-maroon text-maroon-100/90 text-[13px]">
+  <div class="mx-auto flex w-[92%] max-w-[1180px] flex-wrap items-center justify-between gap-y-1.5 py-2.5">
+    <div class="hidden items-center gap-x-6 gap-y-1 md:flex">
+      <a href={site.phoneHref} class="inline-flex items-center gap-2 transition hover:text-white">
+        <i class="fa-solid fa-phone text-gold-300"></i>{site.phoneDisplay}
+      </a>
+      <a href={site.emailHref} class="inline-flex items-center gap-2 transition hover:text-white">
+        <i class="fa-solid fa-envelope text-gold-300"></i>{site.email}
+      </a>
+      <span class="inline-flex items-center gap-2">
+        <i class="fa-solid fa-location-dot text-gold-300"></i>{site.addressArea}
+      </span>
+    </div>
+    <div class="ml-auto flex items-center gap-x-5 gap-y-1">
+      <span class="inline-flex items-center gap-2">
+        <i class="fa-solid fa-clock text-gold-300"></i>{site.hoursShort}
+      </span>
+      <span class="hidden items-center gap-3 sm:flex">
+        <a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="transition hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="transition hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+        <a href={waLink("Hello, I would like to ask about your services.")} target="_blank" rel="noopener" aria-label="WhatsApp" class="transition hover:text-white"><i class="fa-brands fa-whatsapp"></i></a>
+      </span>
+    </div>
+  </div>
+</div>

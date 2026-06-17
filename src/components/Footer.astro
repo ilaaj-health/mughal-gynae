@@ -1,0 +1,65 @@
+---
+import { site, nav, waLink } from "../data/site";
+import { services } from "../data/services";
+const year = new Date().getFullYear();
+const footerServices = services.slice(0, 6);
+---
+
+<footer class="bg-ink text-white/70">
+  <div class="mx-auto grid w-[92%] max-w-[1180px] gap-10 pb-12 pt-16 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1.1fr_1.2fr]">
+    <!-- Brand -->
+    <div>
+      <a href="/" class="mb-4 flex items-center gap-3">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-white/10 text-gold-300 ring-1 ring-gold-500/30"><i class="fa-solid fa-staff-snake text-lg"></i></span>
+        <span class="font-display text-xl font-bold text-white">Mughal Gynae</span>
+      </a>
+      <p class="max-w-sm text-[15px] leading-relaxed text-white/60">
+        {site.legalName} — trusted gynaecology, maternity, diagnostics and family healthcare in Johar Town, Lahore, led by experienced female specialists.
+      </p>
+      <div class="mt-5 flex gap-2.5">
+        <a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-brands fa-instagram"></i></a>
+        <a href={waLink("Hello! I would like to book an appointment.")} target="_blank" rel="noopener" aria-label="WhatsApp" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-[#25D366]"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href={site.emailHref} aria-label="Email" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div>
+      <h4 class="mb-4 font-display text-lg font-bold text-white">Quick Links</h4>
+      <ul class="space-y-2.5 text-[15px]">
+        {nav.map((n) => (
+          <li><a href={n.href} class="transition hover:text-gold-300">{n.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h4 class="mb-4 font-display text-lg font-bold text-white">Our Services</h4>
+      <ul class="space-y-2.5 text-[15px]">
+        {footerServices.map((s) => (
+          <li><a href="/services" class="transition hover:text-gold-300">{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h4 class="mb-4 font-display text-lg font-bold text-white">Get In Touch</h4>
+      <ul class="space-y-3 text-[15px]">
+        <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-gold-300"></i><span>{site.addressLine}, {site.addressArea}</span></li>
+        <li class="flex gap-3"><i class="fa-solid fa-phone mt-1 text-gold-300"></i><a href={site.phoneHref} class="hover:text-gold-300">{site.phoneDisplay}</a></li>
+        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-gold-300"></i><a href={site.emailHref} class="hover:text-gold-300">{site.email}</a></li>
+        <li class="flex gap-3"><i class="fa-solid fa-clock mt-1 text-gold-300"></i><span>Emergency {site.hoursEmergency} · OPD {site.hoursOpd}</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex w-[92%] max-w-[1180px] flex-col items-center justify-between gap-2 py-5 text-[13px] text-white/50 sm:flex-row">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <p class="flex items-center gap-2"><i class="fa-solid fa-heart text-maroon-400"></i> Gynaecology · Maternity · Diagnostics · Family Medicine</p>
+    </div>
+  </div>
+</footer>

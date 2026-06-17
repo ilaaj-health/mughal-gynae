@@ -1,0 +1,123 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Stats from "../components/Stats.astro";
+import CTA from "../components/CTA.astro";
+import { site } from "../data/site";
+
+const values = [
+  { icon: "fa-solid fa-hand-holding-heart", title: "Compassion", text: "Every patient is treated with kindness, patience and genuine respect." },
+  { icon: "fa-solid fa-user-shield", title: "Privacy", text: "Discreet, confidential care in a safe and comfortable setting." },
+  { icon: "fa-solid fa-scale-balanced", title: "Honesty", text: "Ethical advice and transparent fees — never unnecessary tests or procedures." },
+  { icon: "fa-solid fa-microscope", title: "Quality", text: "Evidence-based medicine supported by modern diagnostic facilities." },
+];
+
+const facilities = [
+  { icon: "fa-solid fa-bed-pulse", title: "Maternity & Labour Ward", text: "Clean, well-equipped delivery suite with 24/7 specialist cover." },
+  { icon: "fa-solid fa-wave-square", title: "Ultrasound & Radiology", text: "On-site obstetric and gynae ultrasound for fast, accurate imaging." },
+  { icon: "fa-solid fa-vial", title: "Laboratory & Pathology", text: "A full range of lab tests handled in-house for quicker results." },
+  { icon: "fa-solid fa-prescription-bottle-medical", title: "24/7 Pharmacy", text: "Essential medicines always available, day or night." },
+  { icon: "fa-solid fa-truck-medical", title: "Emergency Services", text: "Round-the-clock cover for obstetric and medical emergencies." },
+  { icon: "fa-solid fa-people-roof", title: "Inpatient & Day-Care", text: "Comfortable rooms for admitted patients and minor procedures." },
+];
+---
+
+<Layout title="About Us" description="Learn about Mughal Medical & Gynae Centre — a family-focused women's hospital in Johar Town, Lahore offering gynaecology, maternity, diagnostics and family medicine.">
+  <PageHero
+    title="About Our Centre"
+    crumb="Get to Know Us"
+    subtitle="A trusted name in women's health for families across Johar Town and greater Lahore."
+  />
+
+  <!-- Story -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto grid w-[92%] max-w-[1180px] items-center gap-12 lg:grid-cols-2">
+      <div class="reveal left relative">
+        <div class="overflow-hidden rounded-3xl shadow-card">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=900&q=80" alt="Specialist doctor at Mughal Medical & Gynae Centre" class="aspect-[4/5] w-full object-cover object-top" />
+        </div>
+        <div class="absolute -right-3 -top-4 hidden h-20 w-20 rounded-tr-3xl border-r-2 border-t-2 border-gold-400 lg:block"></div>
+      </div>
+      <div class="reveal right">
+        <span class="eyebrow text-maroon-700">Our Story</span>
+        <div class="my-4"><span class="gold-rule"></span></div>
+        <h2 class="font-display text-3xl font-bold leading-tight text-ink sm:text-4xl">Reliable, Respectful Care — All Under One Roof</h2>
+        <p class="mt-4 text-[#6b5a61]">
+          {site.legalName} was built around a simple belief: women deserve healthcare that is expert, honest and delivered with dignity. Located on P Block Road in Johar Town, our centre brings together experienced female gynaecologists, family physicians and modern diagnostics so that patients receive complete care without being sent from place to place.
+        </p>
+        <p class="mt-4 text-[#6b5a61]">
+          From a first antenatal visit to safe delivery, from routine screening to specialist gynae surgery, our team supports women and their families at every step — with the warmth and privacy they deserve.
+        </p>
+        <div class="mt-7 grid grid-cols-2 gap-4">
+          <div class="rounded-2xl bg-cream p-5">
+            <i class="fa-solid fa-location-dot mb-2 text-xl text-maroon-700"></i>
+            <p class="font-display text-lg font-bold text-ink">Johar Town</p>
+            <p class="text-sm text-[#6b5a61]">Central, easy-to-reach location in Lahore</p>
+          </div>
+          <div class="rounded-2xl bg-cream p-5">
+            <i class="fa-solid fa-clock mb-2 text-xl text-maroon-700"></i>
+            <p class="font-display text-lg font-bold text-ink">24 / 7</p>
+            <p class="text-sm text-[#6b5a61]">Emergency & maternity availability</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission / Vision -->
+  <section class="bg-cream py-20 sm:py-24">
+    <div class="mx-auto grid w-[92%] max-w-[1180px] gap-6 lg:grid-cols-2">
+      <div class="reveal left rounded-3xl bg-white p-8 shadow-soft sm:p-10">
+        <span class="grid h-14 w-14 place-items-center rounded-2xl bg-maroon-700 text-2xl text-gold-300"><i class="fa-solid fa-bullseye"></i></span>
+        <h3 class="mt-5 font-display text-2xl font-bold text-ink">Our Mission</h3>
+        <p class="mt-3 text-[#6b5a61]">To provide safe, compassionate and affordable women's healthcare — combining experienced specialists with modern facilities, so every patient feels heard, respected and well cared for.</p>
+      </div>
+      <div class="reveal right rounded-3xl bg-white p-8 shadow-soft sm:p-10">
+        <span class="grid h-14 w-14 place-items-center rounded-2xl bg-gold-500 text-2xl text-ink"><i class="fa-solid fa-eye"></i></span>
+        <h3 class="mt-5 font-display text-2xl font-bold text-ink">Our Vision</h3>
+        <p class="mt-3 text-[#6b5a61]">To be the most trusted women's and family healthcare centre in Johar Town — known for clinical excellence, ethical care and genuine warmth toward every family we serve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto w-[92%] max-w-[1180px]">
+      <SectionHeading eyebrow="What We Stand For" title="Our Core Values" subtitle="The principles that guide how we care for every patient who walks through our doors." />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {values.map((v, i) => (
+          <div class:list={["reveal lift group rounded-2xl border border-maroon-100 bg-white p-7 text-center hover:border-gold-400 hover:shadow-card", `d${i}`]}>
+            <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-blush text-2xl text-maroon-700 transition group-hover:bg-maroon-700 group-hover:text-gold-300">
+              <i class={v.icon}></i>
+            </div>
+            <h3 class="font-display text-lg font-bold text-ink">{v.title}</h3>
+            <p class="mt-2 text-[14px] leading-relaxed text-[#6b5a61]">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Stats />
+
+  <!-- Facilities -->
+  <section class="py-20 sm:py-24">
+    <div class="mx-auto w-[92%] max-w-[1180px]">
+      <SectionHeading eyebrow="Our Facilities" title="Everything You Need, In One Place" subtitle="A complete women's and family healthcare facility — from diagnosis to delivery to recovery." />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {facilities.map((f, i) => (
+          <div class:list={["reveal lift flex gap-4 rounded-2xl bg-cream p-6", `d${i % 3}`]}>
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-maroon-700 text-xl text-gold-300"><i class={f.icon}></i></span>
+            <div>
+              <h3 class="font-display text-lg font-bold text-ink">{f.title}</h3>
+              <p class="mt-1 text-[14px] leading-relaxed text-[#6b5a61]">{f.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

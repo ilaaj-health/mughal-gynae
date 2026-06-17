@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  crumb?: string;
+}
+const { title, subtitle, crumb } = Astro.props;
+---
+
+<section class="hero-bg relative overflow-hidden text-white">
+  <div class="dot-grid absolute inset-0 opacity-[.12]"></div>
+  <div class="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full bg-gold-500/10 blur-2xl"></div>
+  <div class="pointer-events-none absolute -bottom-24 left-1/4 h-72 w-72 rounded-full bg-maroon-400/15 blur-3xl"></div>
+
+  <div class="relative mx-auto w-[92%] max-w-[1180px] py-16 text-center sm:py-20">
+    <span class="eyebrow text-gold-300">{crumb ?? "Mughal Gynae"}</span>
+    <h1 class="mt-3 font-display text-4xl font-bold text-white sm:text-5xl" style="animation: fadeUp .8s ease both;">{title}</h1>
+    {subtitle && (
+      <p class="mx-auto mt-4 max-w-2xl text-[17px] text-maroon-100/85" style="animation: fadeUp .8s ease .15s both;">{subtitle}</p>
+    )}
+    <nav class="mt-6 flex items-center justify-center gap-2 text-sm text-maroon-100/70" aria-label="Breadcrumb">
+      <a href="/" class="transition hover:text-gold-300">Home</a>
+      <i class="fa-solid fa-angle-right text-[10px] text-gold-400"></i>
+      <span class="text-white">{title}</span>
+    </nav>
+  </div>
+</section>

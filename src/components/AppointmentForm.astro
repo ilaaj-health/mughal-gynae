@@ -1,0 +1,48 @@
+---
+import { site } from "../data/site";
+import { services } from "../data/services";
+---
+
+<form id="apptForm" class="grid gap-4" data-wa={site.whatsappNumber} novalidate>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="apptName" class="mb-1.5 block text-sm font-semibold text-ink">Full Name *</label>
+      <input id="apptName" name="name" type="text" required placeholder="e.g. Ayesha Khan"
+        class="w-full rounded-xl border border-maroon-100 bg-white px-4 py-3 text-ink transition focus:border-maroon-500 focus:outline-none focus:ring-4 focus:ring-maroon-500/10" />
+    </div>
+    <div>
+      <label for="apptPhone" class="mb-1.5 block text-sm font-semibold text-ink">Phone Number *</label>
+      <input id="apptPhone" name="phone" type="tel" required placeholder="03XX-XXXXXXX"
+        class="w-full rounded-xl border border-maroon-100 bg-white px-4 py-3 text-ink transition focus:border-maroon-500 focus:outline-none focus:ring-4 focus:ring-maroon-500/10" />
+    </div>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="apptService" class="mb-1.5 block text-sm font-semibold text-ink">Service</label>
+      <select id="apptService" name="service"
+        class="w-full rounded-xl border border-maroon-100 bg-white px-4 py-3 text-ink transition focus:border-maroon-500 focus:outline-none focus:ring-4 focus:ring-maroon-500/10">
+        <option value="">Select a service</option>
+        {services.map((s) => <option value={s.title}>{s.title}</option>)}
+        <option value="Other">Other / Not sure</option>
+      </select>
+    </div>
+    <div>
+      <label for="apptDate" class="mb-1.5 block text-sm font-semibold text-ink">Preferred Date</label>
+      <input id="apptDate" name="date" type="date"
+        class="w-full rounded-xl border border-maroon-100 bg-white px-4 py-3 text-ink transition focus:border-maroon-500 focus:outline-none focus:ring-4 focus:ring-maroon-500/10" />
+    </div>
+  </div>
+
+  <div>
+    <label for="apptMsg" class="mb-1.5 block text-sm font-semibold text-ink">Message</label>
+    <textarea id="apptMsg" name="message" rows="4" placeholder="Briefly describe your concern or preferred timing"
+      class="w-full rounded-xl border border-maroon-100 bg-white px-4 py-3 text-ink transition focus:border-maroon-500 focus:outline-none focus:ring-4 focus:ring-maroon-500/10"></textarea>
+  </div>
+
+  <button type="submit" class="shine inline-flex items-center justify-center gap-2.5 rounded-full bg-maroon-700 px-7 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-maroon-800 hover:shadow-soft">
+    <i class="fa-brands fa-whatsapp text-lg"></i> Send Request via WhatsApp
+  </button>
+  <p id="apptError" class="hidden text-sm font-medium text-maroon-700" role="alert"></p>
+  <p class="text-center text-xs text-[#8a7780]">Your details open a pre-filled WhatsApp message — nothing is stored on this site.</p>
+</form>
