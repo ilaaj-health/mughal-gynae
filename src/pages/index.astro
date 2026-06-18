@@ -174,9 +174,9 @@ const whyUs = [
         title="Experienced Doctors You Can Trust"
         subtitle="Our team of senior female gynaecologists and physicians is dedicated to safe, compassionate and expert care."
       />
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredDoctors.slice(0, 4).map((d, i) => (
-          <DoctorCard doctor={d} delay={`d${i % 4}`} />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredDoctors.slice(0, 3).map((d, i) => (
+          <DoctorCard doctor={d} delay={`d${i % 3}`} />
         ))}
       </div>
       <div class="reveal mt-10 text-center">

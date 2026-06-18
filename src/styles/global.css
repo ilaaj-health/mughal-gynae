@@ -37,9 +37,9 @@
   --color-blush:     #f9eef2;
   --color-champagne: #e7c97e;
 
-  /* ---- Fonts ---- */
-  --font-sans:    "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  /* ---- Fonts (Google Sans look; DM Sans is the free fallback that actually loads) ---- */
+  --font-sans:    "Google Sans", "Google Sans Text", "Product Sans", "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Google Sans", "Google Sans Text", "Product Sans", "DM Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Shadows ---- */
   --shadow-soft:   0 10px 30px rgba(124, 31, 61, .12);
