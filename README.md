@@ -37,7 +37,7 @@ src/
 
 ## ✨ Features
 
-- **Premium maroon & gold** theme — Playfair Display (serif headings) + Plus Jakarta Sans (body)
+- **Premium maroon & gold** theme — Google Sans look across headings & body (DM Sans is the free fallback that actually loads; `Google Sans` sits first in the stack for licensed environments)
 - **Animations:** Astro View Transitions between pages, scroll-reveal, animated stat counters, hover/shine micro-interactions, floating badges
 - **WhatsApp-first booking:** click-to-call + appointment form that opens a pre-filled WhatsApp message
 - Google Map, opening hours, 24/7 emergency card

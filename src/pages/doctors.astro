@@ -7,7 +7,7 @@ import CTA from "../components/CTA.astro";
 import { doctors } from "../data/doctors";
 
 const gynae = doctors.filter((d) => d.department === "Gynaecology & Obstetrics");
-const general = doctors.filter((d) => d.department === "General & Family Medicine");
+const allied = doctors.filter((d) => d.department === "Medicine, Diagnostics & Rehabilitation");
 ---
 
 <Layout title="Our Doctors" description="Meet the experienced female gynaecologists and physicians at Mughal Medical & Gynae Centre, Johar Town Lahore — including a UK-trained MRCOG consultant.">
@@ -37,12 +37,12 @@ const general = doctors.filter((d) => d.department === "General & Family Medicin
   <section class="bg-cream py-20 sm:py-24">
     <div class="mx-auto w-[92%] max-w-[1180px]">
       <SectionHeading
-        eyebrow="General & Family Medicine"
-        title="Care for the Whole Family"
-        subtitle="Everyday medical care for adults and families, alongside our specialist women's services."
+        eyebrow="Medicine, Diagnostics & Rehab"
+        title="Family Medicine, Diagnostics & Rehabilitation"
+        subtitle="Beyond gynaecology — general medicine, radiology & ultrasound, and physiotherapy to care for the whole family."
       />
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {general.map((d, i) => (
+        {allied.map((d, i) => (
           <DoctorCard doctor={d} delay={`d${i % 3}`} />
         ))}
       </div>

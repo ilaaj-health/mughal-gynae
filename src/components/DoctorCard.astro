@@ -22,9 +22,11 @@ const wa = waLink(`Hello, I would like to book an appointment with ${doctor.name
         </span>
       </div>
     )}
-    <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-maroon-700 shadow-sm">
-      {doctor.experience}+ yrs
-    </span>
+    {doctor.experience && (
+      <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-maroon-700 shadow-sm">
+        {doctor.experience}+ yrs
+      </span>
+    )}
   </div>
 
   <div class="p-6">
