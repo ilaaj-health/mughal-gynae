@@ -12,7 +12,7 @@ const callHref = doctor.phone ? `tel:${doctor.phone.replace(/[^+\d]/g, "")}` : s
 const profileHref = `/doctors/${doctor.slug}`;
 ---
 
-<article class:list={["reveal lift group overflow-hidden rounded-2xl border border-maroon-100 bg-white hover:border-gold-400 hover:shadow-card", delay]}>
+<article class:list={["reveal lift group flex flex-col overflow-hidden rounded-2xl border border-maroon-100 bg-white hover:border-gold-400 hover:shadow-card", delay]}>
   <div class="relative aspect-[4/5] overflow-hidden bg-linear-to-br from-maroon-700 via-maroon-800 to-maroon-950">
     <div class="dot-grid absolute inset-0 opacity-20"></div>
     {doctor.image ? (
@@ -31,7 +31,7 @@ const profileHref = `/doctors/${doctor.slug}`;
     )}
   </div>
 
-  <div class="p-6">
+  <div class="flex flex-1 flex-col p-6">
     <span class="text-[11px] font-semibold uppercase tracking-wider text-gold-700">{doctor.department}</span>
     <h3 class="mt-1.5 font-display text-xl font-bold text-ink">{doctor.name}</h3>
     <p class="text-sm font-medium text-maroon-700">{doctor.credentials}</p>
@@ -41,7 +41,7 @@ const profileHref = `/doctors/${doctor.slug}`;
         <span class="rounded-full bg-blush px-2.5 py-1 text-[11px] font-medium text-maroon-800">{f}</span>
       ))}
     </div>
-    <div class="mt-5 flex gap-2">
+    <div class="mt-auto flex gap-2 pt-5">
       <a href={profileHref} class="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-maroon-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon-800">
         View Profile <i class="fa-solid fa-arrow-right-long text-xs"></i>
       </a>

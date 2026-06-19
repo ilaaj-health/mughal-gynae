@@ -8,7 +8,10 @@ import Testimonials from "../components/Testimonials.astro";
 import CTA from "../components/CTA.astro";
 import { site, waLink } from "../data/site";
 import { featuredServices } from "../data/services";
-import { featuredDoctors } from "../data/doctors";
+import { doctors, featuredDoctors } from "../data/doctors";
+
+// Real photos of the senior female specialists for the hero trust line
+const trustAvatars = doctors.filter((d) => d.image && d.slug !== "dr-faizan-rasheed").slice(0, 4);
 
 const features = [
   { icon: "fa-solid fa-venus", title: "Female Specialists", text: "Experienced, PMDC-verified lady gynaecologists for care in complete comfort and privacy." },
@@ -72,8 +75,15 @@ const whyUs = [
         <!-- Elegant trust line (avatars + rating) -->
         <div class="mt-11 flex items-center gap-4" style="animation: fadeUp .8s ease .6s both;">
           <div class="flex -space-x-3">
-            {["S", "M", "Z", "A"].map((c) => (
-              <span class="grid h-11 w-11 place-items-center rounded-full bg-linear-to-br from-maroon-500 to-maroon-800 font-display text-sm font-bold text-gold-200 ring-2 ring-gold-400/40">{c}</span>
+            {trustAvatars.map((d) => (
+              <img
+                src={d.image}
+                alt={d.name}
+                loading="lazy"
+                width="44"
+                height="44"
+                class="h-11 w-11 rounded-full bg-maroon-800 object-cover object-top ring-2 ring-gold-400/40"
+              />
             ))}
           </div>
           <div class="text-sm leading-tight text-maroon-100/85">
