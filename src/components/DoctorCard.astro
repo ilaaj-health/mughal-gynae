@@ -10,9 +10,15 @@ const { doctor, delay = "" } = Astro.props;
 const wa = waLink(`Hello, I would like to book an appointment with ${doctor.name} at Mughal Gynae.`);
 const callHref = doctor.phone ? `tel:${doctor.phone.replace(/[^+\d]/g, "")}` : site.phoneHref;
 const profileHref = `/doctors/${doctor.slug}`;
+const keywords = [doctor.name, doctor.title, doctor.credentials, doctor.specialization, ...doctor.focus].filter(Boolean).join(" ").toLowerCase();
 ---
 
-<article class:list={["reveal lift group flex flex-col overflow-hidden rounded-2xl border border-maroon-100 bg-white hover:border-gold-400 hover:shadow-card", delay]}>
+<article
+  class:list={["doctor-card reveal lift group flex flex-col overflow-hidden rounded-2xl border border-maroon-100 bg-white hover:border-gold-400 hover:shadow-card", delay]}
+  data-name={doctor.name.toLowerCase()}
+  data-department={doctor.department}
+  data-keywords={keywords}
+>
   <div class="relative aspect-[4/5] overflow-hidden bg-linear-to-br from-maroon-700 via-maroon-800 to-maroon-950">
     <div class="dot-grid absolute inset-0 opacity-20"></div>
     {doctor.image ? (
