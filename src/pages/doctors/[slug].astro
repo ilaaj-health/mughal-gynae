@@ -1,0 +1,135 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTA from "../../components/CTA.astro";
+import { doctors, initials } from "../../data/doctors";
+import { site, waLink } from "../../data/site";
+
+export function getStaticPaths() {
+  return doctors.map((d) => ({ params: { slug: d.slug }, props: { doctor: d } }));
+}
+
+const { doctor } = Astro.props;
+const wa = waLink(`Hello, I would like to book an appointment with ${doctor.name} at Mughal Gynae.`);
+const callHref = doctor.phone ? `tel:${doctor.phone.replace(/[^+\d]/g, "")}` : site.phoneHref;
+const shortName = doctor.name.split(" ").slice(0, 2).join(" ");
+
+const facts = [
+  doctor.experience ? { icon: "fa-award", label: "Experience", value: `${doctor.experience}+ years` } : null,
+  doctor.specialization ? { icon: "fa-stethoscope", label: "Specialization", value: doctor.specialization } : null,
+  { icon: "fa-building-columns", label: "Department", value: doctor.department },
+  doctor.pmdc ? { icon: "fa-id-card-clip", label: "PMDC No.", value: doctor.pmdc } : null,
+  doctor.availability ? { icon: "fa-clock", label: "Availability", value: doctor.availability } : null,
+].filter(Boolean);
+---
+
+<Layout title={doctor.name} description={`${doctor.name} — ${doctor.title} at ${site.name}. ${doctor.specialization ?? ""}`}>
+  <!-- Banner -->
+  <section class="hero-bg relative overflow-hidden text-white">
+    <div class="dot-grid absolute inset-0 opacity-[.10]"></div>
+    <div class="pointer-events-none absolute -right-16 -top-20 h-72 w-72 rounded-full bg-gold-500/10 blur-2xl"></div>
+    <div class="relative mx-auto w-[92%] max-w-[1180px] py-14 sm:py-16">
+      <nav class="flex flex-wrap items-center gap-2 text-sm text-maroon-100/70" aria-label="Breadcrumb">
+        <a href="/" class="transition hover:text-gold-300">Home</a>
+        <i class="fa-solid fa-angle-right text-[10px] text-gold-400"></i>
+        <a href="/doctors" class="transition hover:text-gold-300">Doctors</a>
+        <i class="fa-solid fa-angle-right text-[10px] text-gold-400"></i>
+        <span class="text-white">{doctor.name}</span>
+      </nav>
+      <span class="eyebrow mt-5 block text-gold-300">{doctor.department}</span>
+      <h1 class="mt-2 font-display text-4xl font-bold text-white sm:text-5xl" style="animation: fadeUp .7s ease both;">{doctor.name}</h1>
+      <p class="mt-2 text-lg text-maroon-100/85">{doctor.title}</p>
+    </div>
+  </section>
+
+  <!-- Detail -->
+  <section class="py-14 sm:py-20">
+    <div class="mx-auto grid w-[92%] max-w-[1180px] gap-10 lg:grid-cols-[360px_1fr]">
+      <!-- Left: photo + contact -->
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <div class="overflow-hidden rounded-3xl border border-maroon-100 shadow-card">
+          {doctor.image ? (
+            <img src={doctor.image} alt={doctor.name} class="aspect-[4/5] w-full object-cover object-top" />
+          ) : (
+            <div class="grid aspect-[4/5] place-items-center bg-linear-to-br from-maroon-700 to-maroon-950">
+              <span class="font-display text-6xl font-bold text-gold-200">{initials(doctor.name)}</span>
+            </div>
+          )}
+        </div>
+
+        <div class="mt-5 rounded-3xl bg-cream p-6">
+          <h3 class="font-display text-lg font-bold text-ink">Book with {shortName}</h3>
+          <div class="mt-4 space-y-3 text-sm">
+            <a href={callHref} class="flex items-center gap-3 text-[#5c4a52] transition hover:text-maroon-700">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-maroon-100 text-maroon-700"><i class="fa-solid fa-phone"></i></span>
+              {doctor.phone ?? site.phoneDisplay}
+            </a>
+            <a href={site.emailHref} class="flex items-center gap-3 break-all text-[#5c4a52] transition hover:text-maroon-700">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-maroon-100 text-maroon-700"><i class="fa-solid fa-envelope"></i></span>
+              {site.email}
+            </a>
+          </div>
+          <div class="mt-5 flex flex-col gap-2.5">
+            <a href={wa} target="_blank" rel="noopener" class="shine inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 font-semibold text-white transition hover:bg-[#1ebe5b]">
+              <i class="fa-brands fa-whatsapp text-lg"></i> Book on WhatsApp
+            </a>
+            <a href={callHref} class="inline-flex items-center justify-center gap-2 rounded-full bg-maroon-700 px-5 py-3 font-semibold text-white transition hover:bg-maroon-800">
+              <i class="fa-solid fa-phone"></i> Call Now
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right: profile -->
+      <div>
+        <span class="eyebrow text-maroon-700">About the Doctor</span>
+        <div class="my-3"><span class="gold-rule"></span></div>
+        <p class="text-[17px] leading-relaxed text-[#5c4a52]">{doctor.bio}</p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {facts.map((f) => (
+            <div class="flex gap-3 rounded-2xl border border-maroon-100 bg-white p-4">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-blush text-maroon-700"><i class={`fa-solid ${f.icon}`}></i></span>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-gold-700">{f.label}</p>
+                <p class="font-medium text-ink">{f.value}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {doctor.qualifications && (
+          <div class="mt-8">
+            <h3 class="font-display text-xl font-bold text-ink">Qualifications</h3>
+            <p class="mt-2 text-[#5c4a52]">{doctor.qualifications}</p>
+          </div>
+        )}
+
+        <div class="mt-8">
+          <h3 class="font-display text-xl font-bold text-ink">Areas of Focus</h3>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {doctor.focus.map((f) => (
+              <span class="rounded-full bg-blush px-3.5 py-1.5 text-sm font-medium text-maroon-800">{f}</span>
+            ))}
+          </div>
+        </div>
+
+        {doctor.hospitals && doctor.hospitals.length > 0 && (
+          <div class="mt-8">
+            <h3 class="font-display text-xl font-bold text-ink">Practicing At</h3>
+            <ul class="mt-3 grid gap-2.5 sm:grid-cols-2">
+              {doctor.hospitals.map((h) => (
+                <li class="flex items-start gap-2.5 text-[#5c4a52]"><i class="fa-solid fa-location-dot mt-1 text-maroon-600"></i>{h}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <a href="/doctors" class="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-maroon-700 transition-all hover:gap-3">
+          <i class="fa-solid fa-arrow-left-long"></i> Back to all doctors
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</Layout>

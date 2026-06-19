@@ -1,16 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
-import SectionHeading from "../components/SectionHeading.astro";
-import DoctorCard from "../components/DoctorCard.astro";
-import CTA from "../components/CTA.astro";
-import { doctors } from "../data/doctors";
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import DoctorCard from "../../components/DoctorCard.astro";
+import CTA from "../../components/CTA.astro";
+import { doctors } from "../../data/doctors";
 
 const gynae = doctors.filter((d) => d.department === "Gynaecology & Obstetrics");
-const allied = doctors.filter((d) => d.department === "Medicine, Diagnostics & Rehabilitation");
+const allied = doctors.filter((d) => d.department === "Diagnostics & General Medicine");
 ---
 
-<Layout title="Our Doctors" description="Meet the experienced female gynaecologists and physicians at Mughal Medical & Gynae Centre, Johar Town Lahore — including a UK-trained MRCOG consultant.">
+<Layout title="Our Doctors" description="Meet the experienced gynaecologists, radiologist and physicians at Mughal Medical & Gynae Centre, Johar Town Lahore — including a UK-trained MRCOG consultant.">
   <PageHero
     title="Our Specialists"
     crumb="Meet the Team"
@@ -33,13 +33,13 @@ const allied = doctors.filter((d) => d.department === "Medicine, Diagnostics & R
     </div>
   </section>
 
-  <!-- General medicine team -->
+  <!-- Diagnostics & general medicine -->
   <section class="bg-cream py-20 sm:py-24">
     <div class="mx-auto w-[92%] max-w-[1180px]">
       <SectionHeading
-        eyebrow="Medicine, Diagnostics & Rehab"
-        title="Family Medicine, Diagnostics & Rehabilitation"
-        subtitle="Beyond gynaecology — general medicine, radiology & ultrasound, and physiotherapy to care for the whole family."
+        eyebrow="Diagnostics & General Medicine"
+        title="Diagnostics & Family Care"
+        subtitle="Radiology, ultrasound and general medicine alongside our specialist women's services."
       />
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {allied.map((d, i) => (

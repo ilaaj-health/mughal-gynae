@@ -14,15 +14,15 @@ export const site = {
   description:
     "Mughal Medical & Gynae Centre, Johar Town Lahore — trusted gynaecology, maternity, diagnostics and family healthcare under one roof, led by experienced female specialists.",
 
-  // ---- Contact (TODO: confirm) ----
-  phoneDisplay: "042-3237 7001",      // TODO: confirm primary landline
-  phoneHref: "tel:+924232377001",     // TODO: confirm
-  whatsappDisplay: "0311-1222398",    // TODO: confirm WhatsApp number
-  whatsappNumber: "923111222398",     // TODO: confirm (intl, no +)
-  emergencyDisplay: "042-3237 7001",  // TODO: confirm 24/7 emergency line
-  emergencyHref: "tel:+924232377001", // TODO: confirm
-  email: "info@mughalgynaehospital.com", // TODO: confirm
-  emailHref: "mailto:info@mughalgynaehospital.com",
+  // ---- Contact ----
+  phoneDisplay: "042 3233 1516",        // PTCL landline (calls)
+  phoneHref: "tel:+924232331516",
+  whatsappDisplay: "0324 8199663",      // WhatsApp (+92 324 8199663)
+  whatsappNumber: "923248199663",
+  emergencyDisplay: "042 3233 1516",
+  emergencyHref: "tel:+924232331516",
+  email: "mughalcomplex@gmail.com",
+  emailHref: "mailto:mughalcomplex@gmail.com",
 
   // ---- Location ----
   addressLine: "663 P Block Road, Block Q Phase 2",

@@ -8,10 +8,12 @@ interface Props {
 }
 const { doctor, delay = "" } = Astro.props;
 const wa = waLink(`Hello, I would like to book an appointment with ${doctor.name} at Mughal Gynae.`);
+const callHref = doctor.phone ? `tel:${doctor.phone.replace(/[^+\d]/g, "")}` : site.phoneHref;
+const profileHref = `/doctors/${doctor.slug}`;
 ---
 
 <article class:list={["reveal lift group overflow-hidden rounded-2xl border border-maroon-100 bg-white hover:border-gold-400 hover:shadow-card", delay]}>
-  <div class="relative h-60 overflow-hidden bg-linear-to-br from-maroon-700 via-maroon-800 to-maroon-950">
+  <div class="relative aspect-[4/5] overflow-hidden bg-linear-to-br from-maroon-700 via-maroon-800 to-maroon-950">
     <div class="dot-grid absolute inset-0 opacity-20"></div>
     {doctor.image ? (
       <img src={doctor.image} alt={doctor.name} loading="lazy" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105" />
@@ -40,10 +42,13 @@ const wa = waLink(`Hello, I would like to book an appointment with ${doctor.name
       ))}
     </div>
     <div class="mt-5 flex gap-2">
-      <a href={wa} target="_blank" rel="noopener" class="shine inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-maroon-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon-800">
-        <i class="fa-brands fa-whatsapp"></i> Book
+      <a href={profileHref} class="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-maroon-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-maroon-800">
+        View Profile <i class="fa-solid fa-arrow-right-long text-xs"></i>
       </a>
-      <a href={site.phoneHref} aria-label={`Call to book with ${doctor.name}`} class="grid h-10 w-10 place-items-center rounded-full border border-maroon-200 text-maroon-700 transition hover:bg-maroon-700 hover:text-white">
+      <a href={wa} target="_blank" rel="noopener" aria-label={`Book with ${doctor.name} on WhatsApp`} class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25D366] text-white transition hover:bg-[#1ebe5b]">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+      <a href={callHref} aria-label={`Call ${doctor.name}`} class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-maroon-200 text-maroon-700 transition hover:bg-maroon-700 hover:text-white">
         <i class="fa-solid fa-phone"></i>
       </a>
     </div>
