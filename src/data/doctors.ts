@@ -119,3 +119,23 @@ export function initials(name: string): string {
     .map((p) => p[0]?.toUpperCase() ?? "")
     .join("");
 }
+
+/* ============================================================
+   OPERATING / SURGICAL SUPPORT TEAM
+   Non-consulting staff (operation theatre & surgical support).
+   Rendered as simple cards on the Doctors page — no booking/profile.
+   ============================================================ */
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  image: string | null;
+};
+
+export const operatingTeam: TeamMember[] = [
+  {
+    name: "Muhammad Mahboob Alam",
+    role: "Operating Theatre Staff", // TODO: confirm exact designation
+    image: "/doctors/muhammad-mahboob-alam.jpeg",
+  },
+];

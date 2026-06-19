@@ -4,7 +4,7 @@ import PageHero from "../../components/PageHero.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 import DoctorCard from "../../components/DoctorCard.astro";
 import CTA from "../../components/CTA.astro";
-import { doctors } from "../../data/doctors";
+import { doctors, operatingTeam, initials } from "../../data/doctors";
 
 const gynae = doctors.filter((d) => d.department === "Gynaecology & Obstetrics");
 const allied = doctors.filter((d) => d.department === "Diagnostics & General Medicine");
@@ -48,6 +48,39 @@ const allied = doctors.filter((d) => d.department === "Diagnostics & General Med
       </div>
     </div>
   </section>
+
+  <!-- Operating / surgical support team -->
+  {operatingTeam.length > 0 && (
+    <section class="py-20 sm:py-24">
+      <div class="mx-auto w-[92%] max-w-[1180px]">
+        <SectionHeading
+          eyebrow="Operation Theatre"
+          title="Our Operating Team"
+          subtitle="The skilled operation-theatre and surgical support staff who keep every procedure safe, smooth and comfortable."
+        />
+        <div class="mt-12 flex flex-wrap justify-center gap-6">
+          {operatingTeam.map((m, i) => (
+            <article class:list={["reveal lift group w-full max-w-[280px] overflow-hidden rounded-2xl border border-maroon-100 bg-white text-center hover:border-gold-400 hover:shadow-card", `d${i % 3}`]}>
+              <div class="relative aspect-square overflow-hidden bg-linear-to-br from-maroon-700 via-maroon-800 to-maroon-950">
+                <div class="dot-grid absolute inset-0 opacity-20"></div>
+                {m.image ? (
+                  <img src={m.image} alt={m.name} loading="lazy" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105" />
+                ) : (
+                  <div class="relative grid h-full place-items-center">
+                    <span class="grid h-24 w-24 place-items-center rounded-full bg-white/10 font-display text-3xl font-bold text-gold-200 ring-2 ring-gold-400/50 backdrop-blur-md">{initials(m.name)}</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-6">
+                <h3 class="font-display text-lg font-bold text-ink">{m.name}</h3>
+                <p class="mt-1 text-sm font-medium text-maroon-700">{m.role}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <CTA title="Not sure which doctor to see?" text="Tell us your concern on WhatsApp or by phone and our team will guide you to the right specialist and a suitable appointment time." />
 </Layout>
