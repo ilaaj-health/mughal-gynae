@@ -20,7 +20,7 @@ const footerServices = services.slice(0, 6);
         <a href={site.socials.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-brands fa-facebook-f"></i></a>
         <a href={site.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-brands fa-instagram"></i></a>
         <a href={waLink("Hello! I would like to book an appointment.")} target="_blank" rel="noopener" aria-label="WhatsApp" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-[#25D366]"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href={site.emailHref} aria-label="Email" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-solid fa-envelope"></i></a>
+        <a href="mailto:hello@ilaaj.ai" aria-label="Email" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-1 hover:bg-maroon-700"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
 
@@ -50,16 +50,16 @@ const footerServices = services.slice(0, 6);
       <ul class="space-y-3 text-[15px]">
         <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-gold-300"></i><span>{site.addressLine}, {site.addressArea}</span></li>
         <li class="flex gap-3"><i class="fa-solid fa-phone mt-1 text-gold-300"></i><a href={site.phoneHref} class="hover:text-gold-300">{site.phoneDisplay}</a></li>
-        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-gold-300"></i><a href={site.emailHref} class="hover:text-gold-300">{site.email}</a></li>
+        <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-gold-300"></i><a href="mailto:hello@ilaaj.ai" class="hover:text-gold-300">hello@ilaaj.ai</a></li>
         <li class="flex gap-3"><i class="fa-solid fa-clock mt-1 text-gold-300"></i><span>Emergency {site.hoursEmergency} · OPD {site.hoursOpd}</span></li>
       </ul>
     </div>
   </div>
 
   <div class="border-t border-white/10">
-    <div class="mx-auto flex w-[92%] max-w-[1180px] flex-col items-center justify-between gap-2 py-5 text-[13px] text-white/50 sm:flex-row">
+    <div class="mx-auto flex w-[92%] max-w-[1180px] flex-col items-center justify-between gap-2 pt-5 pb-20 text-[13px] text-white/50 sm:flex-row">
       <p>© {year} {site.legalName}. All rights reserved.</p>
-      <p class="flex items-center gap-2"><i class="fa-solid fa-heart text-maroon-400"></i> Gynaecology · Maternity · Diagnostics · Family Medicine</p>
+      <a href="https://app.ilaaj.ai/chat" target="_blank" rel="noopener" class="flex items-center gap-2 font-semibold text-white/70 transition hover:text-gold-300"><i class="fa-solid fa-wand-magic-sparkles text-gold-300"></i> Powered by <span class="font-bold text-gold-300">Ilaaj AI</span></a>
     </div>
   </div>
 </footer>

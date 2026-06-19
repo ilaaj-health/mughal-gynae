@@ -78,6 +78,11 @@ body {
 /* In @layer base so text-* utilities (e.g. text-white) can override the default colour */
 @layer base {
   h1, h2, h3, h4 { font-family: var(--font-display); color: var(--color-ink); letter-spacing: -.01em; }
+  /* Tailwind v4 resets buttons to the default cursor — restore the pointer */
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  label[for],
+  summary { cursor: pointer; }
 }
 ::selection { background: var(--color-maroon-700); color: #fff; }
 
@@ -158,6 +163,12 @@ body {
 /* Card hover lift helper */
 .lift { transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease; }
 .lift:hover { transform: translateY(-8px); }
+
+/* Doctors page — specialty filter chips (states defined here so JS only toggles .is-active) */
+.doc-filter            { border-color: var(--color-maroon-200); background: #fff; color: var(--color-maroon-700); }
+.doc-filter:hover      { border-color: var(--color-gold-400); background: var(--color-blush); color: var(--color-maroon-800); }
+.doc-filter.is-active  { border-color: var(--color-maroon-700); background: var(--color-maroon-700); color: #fff; }
+.doc-filter.is-active:hover { border-color: var(--color-maroon-800); background: var(--color-maroon-800); color: #fff; }
 
 /* ---------- View Transitions polish ---------- */
 @keyframes vt-fade-in  { from { opacity: 0; } }

@@ -21,8 +21,8 @@ export const site = {
   whatsappNumber: "923248199663",
   emergencyDisplay: "042 3233 1516",
   emergencyHref: "tel:+924232331516",
-  email: "mughalcomplex@gmail.com",
-  emailHref: "mailto:mughalcomplex@gmail.com",
+  email: "hello@ilaaj.ai",
+  emailHref: "mailto:hello@ilaaj.ai",
 
   // ---- Location ----
   addressLine: "663 P Block Road, Block Q Phase 2",

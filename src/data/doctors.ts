@@ -76,6 +76,19 @@ export const doctors: Doctor[] = [
     featured: true,
   },
   {
+    slug: "dr-mahwish",
+    name: "Dr Mahwish",
+    title: "Consultant Gynaecologist & Obstetrician",
+    credentials: "MBBS, FCPS",                              // TODO: confirm
+    qualifications: "MBBS, FCPS (Gynaecology & Obstetrics)", // TODO: confirm
+    specialization: "Consultant Gynaecologist",
+    department: "Gynaecology & Obstetrics",
+    focus: ["Pregnancy care", "Gynae consultation", "Family planning"], // TODO: confirm
+    bio: "Dr Mahwish is a consultant gynaecologist and obstetrician at Mughal Medical & Gynae Centre, caring for women through pregnancy and across every gynaecological concern with a warm, reassuring approach at every visit.", // TODO: confirm
+    image: "https://res.cloudinary.com/dpaz2mhy6/image/upload/v1776350887/ged3x1h29plfzzblkrwh.png",
+    pmdc: "66026-P",
+  },
+  {
     slug: "dr-ishrat-faisal",
     name: "Dr Ishrat Faisal",
     title: "Consultant Radiologist & Senior Ultrasound Specialist",
@@ -119,3 +132,23 @@ export function initials(name: string): string {
     .map((p) => p[0]?.toUpperCase() ?? "")
     .join("");
 }
+
+/* ============================================================
+   OPERATING / SURGICAL SUPPORT TEAM
+   Non-consulting staff (operation theatre & surgical support).
+   Rendered as simple cards on the Doctors page — no booking/profile.
+   ============================================================ */
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  image: string | null;
+};
+
+export const operatingTeam: TeamMember[] = [
+  {
+    name: "Muhammad Mahboob Alam",
+    role: "Operating Theatre Staff", // TODO: confirm exact designation
+    image: "/doctors/muhammad-mahboob-alam.jpeg",
+  },
+];
